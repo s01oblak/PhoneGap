@@ -1,28 +1,84 @@
-document.addEventListener("deviceready", onDeviceReady, false);
-//creates a listener that waits for the deviceready event and then fires onDevice ready function
+ var pictureSource;   // picture source
+    var destinationType; // sets the format of returned value
 
-function onDeviceReady() {
-	startCompass();
-	//runs the startCompass function
-}
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready",onDeviceReady,false);
 
-function startCompass() {
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        pictureSource=navigator.camera.PictureSourceType;
+        destinationType=navigator.camera.DestinationType;
+    }
 
-	var options = {
-		frequency : 50 //sets the compass heading to be updated every 50 milliseconds
-	};
+    // Called when a photo is successfully retrieved
+    //
+    function onPhotoDataSuccess(imageData) {
+      // Uncomment to view the base64-encoded image data
+      // console.log(imageData);
 
-	navigator.compass.watchHeading(onSuccess, onError, options);
-	//gets the compass heading from device and passes heading to onSuccess function
-}
+      // Get image handle
+      //
+      var smallImage = document.getElementById('smallImage');
 
-function onSuccess(heading) {//device s magnetic heading is passed to heading variable
+      // Unhide image elements
+      //
+      smallImage.style.display = 'block';
 
-	$("#needle").rotate(-heading.magneticHeading);
-	//jquery function that gets the #needle id and rotates it minus the current heading
-}
+      // Show the captured photo
+      // The inline CSS rules are used to resize the image
+      //
+      smallImage.src = "data:image/jpeg;base64," + imageData;
+    }
 
-function onError(compassError) {//if there is an error the error will be passed to onError in the compassError variable
-	alert('Compass error: ' + compassError.code);
-	//displays an alert with the error code
-}
+    // Called when a photo is successfully retrieved
+    //
+    function onPhotoURISuccess(imageURI) {
+      // Uncomment to view the image file URI
+      // console.log(imageURI);
+
+      // Get image handle
+      //
+      var largeImage = document.getElementById('largeImage');
+
+      // Unhide image elements
+      //
+      largeImage.style.display = 'block';
+
+      // Show the captured photo
+      // The inline CSS rules are used to resize the image
+      //
+      largeImage.src = imageURI;
+    }
+
+    // A button will call this function
+    //
+    function capturePhoto() {
+      // Take picture using device camera and retrieve image as base64-encoded string
+      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50,
+        destinationType: destinationType.DATA_URL });
+    }
+
+    // A button will call this function
+    //
+    function capturePhotoEdit() {
+      // Take picture using device camera, allow edit, and retrieve image as base64-encoded string
+      navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 20, allowEdit: true,
+        destinationType: destinationType.DATA_URL });
+    }
+
+    // A button will call this function
+    //
+    function getPhoto(source) {
+      // Retrieve image file location from specified source
+      navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
+        destinationType: destinationType.FILE_URI,
+        sourceType: source });
+    }
+
+    // Called if something bad happens.
+    //
+    function onFail(message) {
+      alert('Failed because: ' + message);
+    }

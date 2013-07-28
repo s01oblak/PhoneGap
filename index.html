@@ -1,23 +1,40 @@
 <!DOCTYPE html>
 <html>
-        <title>&nbsp;</title>
-        <head>
-                
-                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-                <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>&nbsp;</title>
+	<head>
 
-                <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
-                <link rel="stylesheet" href="css/styles.css" />
-                
-                <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-                <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
-                <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-                <script src="js/jqRotate.js"></script>
-                
-                <script src="js/common.js"></script>
-        </head>
-        <body>
-                <img src="http://nathanhedglin.us/images/compass.png" id="compass">
-                <img src="http://nathanhedglin.us/images/needle.png" id="needle">
-        </body>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+		<link rel="stylesheet" href="css/styles.css" />
+
+		<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+		<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+		<script src="js/jqRotate.js"></script>
+
+		<script src="js/common.js"></script>
+	</head>
+	<body>
+		<button onclick="capturePhoto();">
+			Capture Photo
+		</button>
+		<br>
+		<button onclick="capturePhotoEdit();">
+			Capture Editable Photo
+		</button>
+		<br>
+		<button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">
+			From Photo Library
+		</button>
+		<br>
+		<button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">
+			From Photo Album
+		</button>
+		<br>
+		<img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
+		<img style="display:none;" id="largeImage" src="" />
+
+	</body>
 </html>
