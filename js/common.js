@@ -1,7 +1,7 @@
-document.addEventListener("deviceready", onDeviceReady, false);
-//creates a listener that waits for the deviceready event and then fires onDevice ready function
+
 
 function onDeviceReady() {
+	alert("zacetek");
 	startCompass();
 	//runs the startCompass function
 }
@@ -17,7 +17,7 @@ function startCompass() {
 }
 
 function onSuccess(heading) {//device s magnetic heading is passed to heading variable
-
+	alert("notr");
 	$("#needle").rotate(-heading.magneticHeading);
 	//jquery function that gets the #needle id and rotates it minus the current heading
 }
