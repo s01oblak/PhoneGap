@@ -1,62 +1,60 @@
 <!DOCTYPE html>
 <html>
-	<title>&nbsp;</title>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>&nbsp;</title>
+        <head>
+                <style>
+                        #compass {
 
-		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
-		<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-		<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
-		<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-	</head>
-	<body>
-		<!-- Start of first page I -->
-		<div data-role="page" id="page1">
-			<!-- Header -->
-			<div data-role="header">
-				<h1>Phonegap Template &amp;</h1>
+                                position: absolute;
+                                top: 0px;
+                                left: 0px;
+                                z-index: 1;
+                        }
+                        #needle {
 
-			</div>
-			<!-- /header -->
-			<!-- Content    -->
-			<div data-role="content">
-				<h3>Content</h3>
-				<p>
-					Blah blah blah blah
-				</p>
-			</div>
-			<!-- /content -->
-			<!-- footer -->
-			<div data-role="footer">
-				<h4>&copy; 2013 Your Name</h4>
-			</div>
-			<!-- /footer -->
-		</div>
-		<!-- /page -->
-	</body>
+                                position: absolute;
+                                top: 8px;
+                                left: 98px;
+                                z-index: 10;
+                        }
+
+                </style>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+
+                <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+                <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+                <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+                <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+                <script src="jqRotate.js"></script>
+        </head>
+        <body>
+                <img src="http://nathanhedglin.us/images/compass.png" id="compass">
+                <img src="http://nathanhedglin.us/images/needle.png" id="needle">
+        </body>
 </html>
 <script>
-	document.addEventListener("deviceready", onDeviceReady, false);
+        document.addEventListener("deviceready", onDeviceReady, false); //creates a listener that waits for the deviceready event and then fires onDevice ready function
 
-	function onDeviceReady() {
-		document.addEventListener("menuButton", onPause, false);
-		document.addEventListener("resume", onResume, false);
-		alert("Device is Ready");
+        function onDeviceReady() { 
+                startCompass(); //runs the startCompass function
+        }
 
-	}
+        function startCompass() {
 
+                var options = {
+                        frequency : 50 //sets the compass heading to be updated every 50 milliseconds
+                };
 
-//What to do when paused
-function onPause(){
-	
-	alert("menuButton!");
-}
+                navigator.compass.watchHeading(onSuccess, onError, options); //gets the compass heading from device and passes heading to onSuccess function
+        }
 
-//What to do when resumed
-function onResume()
-{
-	
-	alert("resume");
-}
+        function onSuccess(heading) {//device s magnetic heading is passed to heading variable
+
+                $("#needle").rotate(-heading.magneticHeading); //jquery function that gets the #needle id and rotates it minus the current heading
+        }
+
+        function onError(compassError) { //if there is an error the error will be passed to onError in the compassError variable
+                alert('Compass error: ' + compassError.code); //displays an alert with the error code
+        }
 </script>
