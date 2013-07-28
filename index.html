@@ -42,19 +42,22 @@
 
         function startCompass() {
 
-                var options = {
+               /* var options = {
                         frequency : 50 //sets the compass heading to be updated every 50 milliseconds
                 };
 
                 navigator.compass.watchHeading(onSuccess, onError, options); //gets the compass heading from device and passes heading to onSuccess function
+                
+                */
+               navigator.device.capture.captureImage(captureSuccess, captureError, {limit: 2});
         }
 
-        function onSuccess(heading) {//device s magnetic heading is passed to heading variable
+        function captureSuccess(heading) {//device s magnetic heading is passed to heading variable
 
                 $("#needle").rotate(-heading.magneticHeading); //jquery function that gets the #needle id and rotates it minus the current heading
         }
 
-        function onError(compassError) { //if there is an error the error will be passed to onError in the compassError variable
+        function captureError(compassError) { //if there is an error the error will be passed to onError in the compassError variable
                 alert('Compass error: ' + compassError.code); //displays an alert with the error code
         }
 </script>
