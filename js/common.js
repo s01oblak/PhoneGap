@@ -2,30 +2,42 @@
     //
     document.addEventListener("deviceready", onDeviceReady, false);
 
-    // device APIs are available
+    
+
+    // Query the database
     //
-    function onDeviceReady() {
-        var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
-        db.transaction(populateDB, errorCB, successCB);
+    function queryDB(tx) {
+        tx.executeSql('SELECT * FROM DEMO', [], querySuccess, errorCB);
     }
 
-    // Populate the database
+    // Query the success callback
     //
-    function populateDB(tx) {
-        tx.executeSql('DROP TABLE IF EXISTS DEMO');
-        tx.executeSql('CREATE TABLE IF NOT EXISTS DEMO (id unique, data)');
-        tx.executeSql('INSERT INTO DEMO (id, data) VALUES (1, "First row")');
-        tx.executeSql('INSERT INTO DEMO (id, data) VALUES (2, "Second row")');
+    function querySuccess(tx, results) {
+        var len = results.rows.length;
+        var strIzpis = "";
+        strIzpis = "DEMO table: " + len + " rows found.\n";
+        for (var i=0; i<len; i++){
+            strIzpis = strIzpis + "Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).data + "\n";
+        }
+        alert(strIzpis);
     }
 
     // Transaction error callback
     //
-    function errorCB(tx, err) {
-        alert("Error processing SQL: "+err);
+    function errorCB(err) {
+        console.log("Error processing SQL: "+err.code);
     }
 
     // Transaction success callback
     //
     function successCB() {
-        alert("success!");
+        var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
+        db.transaction(queryDB, errorCB);
+    }
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
+        db.transaction(queryDB, errorCB, successCB);
     }
