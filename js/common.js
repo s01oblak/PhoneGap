@@ -4,7 +4,7 @@ var strImageOrientation = "";
 // Wait for device API libraries to load
 //
 document.addEventListener("deviceready", onDeviceReady, false);
-
+$.mobile.orientationChangeEnabled = false;
 // device APIs are available
 //
 function onDeviceReady() {
