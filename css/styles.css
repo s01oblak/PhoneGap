@@ -27,6 +27,13 @@
 	padding: 20px;
 	width: 50px;
 }
+#btnObrni {
+	background-color: purple;
+	color: white;
+	cursor: pointer;
+	padding: 20px;
+	width: 50px;
+}
 
 
 #myImage {

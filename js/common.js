@@ -39,6 +39,14 @@ function onDeviceReady() {
 
 	});
 
+	// OBRNI
+	$("#btnObrni").click(function() {
+
+		$(window).orientationchange();
+
+	});
+
+
 }
 
 
