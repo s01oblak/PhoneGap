@@ -32,8 +32,8 @@ function onSuccess(imageURI) {
     image.src = imageURI;
 
 	$("#myImage").jqPuzzle({
-		window_width: $(window).width(),
-		window_height: $(window).height()
+		window_width: $(window).height(),
+		window_height: $(window).width()
 	},{}, function(){ $("#container").css("opacity","1"); });
 	
 }
