@@ -15,7 +15,7 @@ function onDeviceReady() {
 
 
 	$(window).on("orientationchange", function(event) {
-		alert("This device is in " + event.orientation + " mode!");
+		//alert("This device is in " + event.orientation + " mode!");
 	});
 
 	// FOTOAPARAT
@@ -66,6 +66,7 @@ function onSuccess(imageURI) {
 	if (strWindowOrientation != strImageOrientation) {
 		intWidth = $(window).height();
 		intHeight = $(window).width();
+		$(window).orientationchange();
 	}
 
 	$("#myImage").jqPuzzle({
