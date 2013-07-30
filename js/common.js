@@ -40,5 +40,7 @@
     function onDeviceReady() {
         //var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
         //db.transaction(queryDB, errorCB, successCB);
+        
+        $("#test").width($(document).width() - 15).height($(document).height() - 10);
         alert($(document).width() + "px  x  " + $(document).height() + "px");
     }
