@@ -38,6 +38,7 @@
     // device APIs are available
     //
     function onDeviceReady() {
-        var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
-        db.transaction(queryDB, errorCB, successCB);
+        //var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
+        //db.transaction(queryDB, errorCB, successCB);
+        alert($(document).width() + "px  x  " + $(document).height() + "px");
     }
