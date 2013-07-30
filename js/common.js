@@ -18,7 +18,10 @@ function onDeviceReady() {
 
 
 	});
-
+	
+	
+	$("#ttt").jqPuzzle();
+	
 }
 
 function onSuccess(imageURI) {
