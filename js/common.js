@@ -5,6 +5,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 // device APIs are available
 //
 function onDeviceReady() {
+	$("#container").css("opacity","0");
 	//var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
 	//db.transaction(queryDB, errorCB, successCB);
 
@@ -20,13 +21,21 @@ function onDeviceReady() {
 	});
 	
 	
-	$("#ttt").jqPuzzle();
+	
+	
+	
 	
 }
 
 function onSuccess(imageURI) {
     var image = document.getElementById('myImage');
     image.src = imageURI;
+
+	$("#myImage").jqPuzzle({
+		window_width: $(window).width(),
+		window_height: $(window).height()
+	},{}, function(){ $("#container").css("opacity","1"); });
+	
 }
 
 
