@@ -8,6 +8,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 // device APIs are available
 //
 function onDeviceReady() {
+	document.addEventListener("orientationchange", onOrientationChange, false);
 	$("#container").css("opacity","0");
 	//var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
 	//db.transaction(queryDB, errorCB, successCB);
@@ -40,6 +41,11 @@ function onSuccess(imageURI) {
     var image = document.getElementById('myImage');
     image.src = imageURI;
 	
+	if ($(document).width() > $(document).height()){
+		strWindowOrientation = "landscape";
+	}else{
+		strWindowOrientation = "portrait";		
+	}
 	
 	if (image.width > image.height){
 		strImageOrientation = "landscape";
@@ -65,4 +71,9 @@ function onSuccess(imageURI) {
 
 function onFail(message) {
 	alert('Failed because: ' + message);
+}
+
+function onOrientationChange(){
+	alert("d");
+	
 }
