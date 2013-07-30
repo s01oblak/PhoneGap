@@ -13,10 +13,9 @@ function onDeviceReady() {
 
 	$("#test").click(function() {
 
-		navigator.camera.getPicture(onSuccess, onFail, {
-			quality : 50,
-			destinationType : Camera.DestinationType.DATA_URL
-		});
+		navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
+    		destinationType: Camera.DestinationType.FILE_URI });
+
 
 	});
 
