@@ -42,7 +42,7 @@ function onDeviceReady() {
 	// OBRNI
 	$("#btnObrni").click(function() {
 
-		$(window).orientationchange();
+		navigator.screenOrientation.set('landscape');
 
 	});
 
