@@ -13,17 +13,23 @@
 	z-index: 10;
 }
 
-#test {
+#btnOpenCamera {
 	background-color: green;
-	position: absolute;
-	top: 5px;
-	left: 5px;
 	color: white;
-	padding: 10px;
+	cursor: pointer;
+	padding: 20px;
+	width: 50px;
+}
+#btnOpenGalery {
+	background-color: blue;
+	color: white;
+	cursor: pointer;
+	padding: 20px;
+	width: 50px;
 }
 
-#myImage{
-	
+
+#myImage {
+
 	width: 100%;
-	
 }
