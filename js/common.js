@@ -1,3 +1,6 @@
+var strWindowOrientation = "";
+var strImageOrientation = "";
+
 // Wait for device API libraries to load
 //
 document.addEventListener("deviceready", onDeviceReady, false);
@@ -15,25 +18,46 @@ function onDeviceReady() {
 	$("#test").click(function() {
 
 		navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
-    		destinationType: Camera.DestinationType.FILE_URI });
+    		destinationType: Camera.DestinationType.FILE_URI, 
+    		correctOrientation: true });
 
 
 	});
 	
 	
 	
+	if ($(document).width() > $(document).height()){
+		strWindowOrientation = "landscape";
+	}else{
+		strWindowOrientation = "portrait";		
+	}
 	
-	
+	//alert(strWindowOrientation);
 	
 }
 
 function onSuccess(imageURI) {
     var image = document.getElementById('myImage');
     image.src = imageURI;
-
+	
+	
+	if (image.width > image.height){
+		strImageOrientation = "landscape";
+	}else{
+		strImageOrientation = "portrait";		
+	}
+	
+	var intWidth = $(window).width();
+	var intHeight = $(window).height();
+	
+	if (strWindowOrientation != strImageOrientation){
+		intWidth = $(window).height();
+		intHeight = $(window).width();
+	}
+		
 	$("#myImage").jqPuzzle({
-		window_width: $(window).height(),
-		window_height: $(window).width()
+		window_width: intWidth,
+		window_height: intHeight
 	},{}, function(){ $("#container").css("opacity","1"); });
 	
 }
