@@ -2,13 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.sample.someapp"
       android:versionCode="1"
-      android:versionName="1.0">
+      android:versionName="1.0"
+      android:installLocation="auto">      
     <uses-sdk android:minSdkVersion="7" />
  
-    <uses-permission android:name="android.permission.CAMERA"></uses-permission>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    
+    <uses-feature android:name="android.hardware.camera" android:required="false" />  
  
-    <application android:label="@string/app_name" android:description="@string/app_desc"
-        android:icon="@drawable/quizicon" android:debuggable="true">
+    <application android:label="Jagoda 2!" android:description="Aplikacija za mojega Jakata!"
+        android:icon="icon.png" android:debuggable="false">
         <activity android:name=".QuizSplashActivity"
                   android:label="@string/app_name">
             <intent-filter>
