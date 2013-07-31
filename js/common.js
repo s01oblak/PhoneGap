@@ -1,6 +1,10 @@
 var strWindowOrientation = "";
 var strImageOrientation = "";
-
+var odmik = {
+		poVisini: 20,
+		poSirini: 20
+	}
+	
 // Wait for device API libraries to load
 //
 document.addEventListener("deviceready", onDeviceReady, false);
@@ -49,7 +53,7 @@ function onSuccess(imageURI) {
 	$("#navigacija").hide();
 	//var image = document.getElementById('myImage');
 	//image.src = imageURI;
-	$("#container").append('<img onload="slikaNalozena();" id="myImage" src="' + imageURI + '" />');
+	$("#container DIV").append('<img onload="slikaNalozena();" id="myImage" src="' + imageURI + '" />');
 	
 	
 
@@ -60,7 +64,10 @@ function slikaNalozena(){
 	
 	var strWindowOrientation = dobiOrintacijoOkna();
 	var strImageOrientation = dobiOrintacijoSlike();
-
+	
+	odmik.poSirini = Math.floor($(window).width() / 10);
+	odmik.poVisini = Math.floor($(window).height() / 10);
+	
 	var intWindowRazmerje = 0;
 	//alert(typeof intWindowRazmerje);
 	if ($(window).width() > $(window).height()) {
@@ -73,18 +80,12 @@ function slikaNalozena(){
 	var intWidthSlike = $("#myImage").width();
 	
 	var intImgRazmerje = 0;
-	//alert(typeof intWindowRazmerje);
-	//alert(image.Height + " " + image.height + " " + $("#myImage").height());
+	
 	if (intWidthSlike > intHeightSlike) {
-		//alert("1");
 		intImgRazmerje = intHeightSlike / intWidthSlike;
-		//alert("1: " + intImgRazmerje + "   " + intHeightSlike + " x " + intWidthSlike);
 	} else {
-		//alert("2");
 		intImgRazmerje = intWidthSlike / intHeightSlike;
-		//alert("2: " + intImgRazmerje + "   " + intHeightSlike + " x " + image.width);
 	}
-	//alert("r: " + intImgRazmerje);
 	var intWidth = $(window).width();
 	var intHeight = $(window).height();
 
@@ -124,15 +125,16 @@ function slikaNalozena(){
 		}
 
 	}
-
-	//alert(intNewImgWidth + " x " + intNewImgHeight);
-	//alert(intWindowRazmerje + " x " + intImgRazmerje);
-
+	
+	intNewImgWidth = intNewImgWidth - odmik.poVisini;
+	intNewImgHeight = intNewImgHeight - odmik.poSirini;
+	
 	$("#myImage").jqPuzzle({
 		window_width : parseInt(intNewImgWidth),
 		window_height : parseInt(intNewImgHeight)
 	}, {}, function() {
-		$("#container").css("opacity", "1");
+		
+		$("#container").css("opacity", "1").css("top", Math.floor(($(window).height() - intNewImgHeight) / 2)).css("left", Math.floor(($(window).width() - intNewImgWidth) / 2));
 	});
 	
 	
@@ -144,7 +146,6 @@ function onFail(message) {
 }
 
 function dobiOrintacijoOkna() {
-	//alert($(document).width());
 	if ($(document).width() > $(document).height()) {
 		return "landscape";
 	} else {

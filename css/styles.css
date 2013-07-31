@@ -40,3 +40,13 @@
 
 	width: 100%;
 }
+
+#container{
+	position: absolute;
+	
+	border: 1px solid black;
+	/*border-radius: 5px;*/
+}
+#container DIV{
+	border: 1px solid white;
+}
