@@ -65,8 +65,8 @@ function slikaNalozena(){
 	var strWindowOrientation = dobiOrintacijoOkna();
 	var strImageOrientation = dobiOrintacijoSlike();
 	
-	odmik.poSirini = Math.floor($(window).width() / 10);
-	odmik.poVisini = Math.floor($(window).height() / 10);
+	odmik.poSirini = Math.floor($(window).width() / 20);
+	odmik.poVisini = Math.floor($(window).height() / 20);
 	
 	var intWindowRazmerje = 0;
 	//alert(typeof intWindowRazmerje);
@@ -112,6 +112,13 @@ function slikaNalozena(){
 			intNewImgHeight = intWindowShort;
 			intNewImgWidth = Math.floor(intNewImgHeight * (intWidthSlike / intHeightSlike));
 		}
+		
+		
+		
+		$("#container").css("top", Math.floor(intWindowShort - intNewImgHeight) / 2).css("left", Math.floor(intWindowLong - intNewImgWidth) / 2);
+		
+		
+		
 
 	} else {
 		if (intImgRazmerje < intWindowRazmerje) {
@@ -123,7 +130,7 @@ function slikaNalozena(){
 			intNewImgWidth = intWindowShort;
 			intNewImgHeight = Math.floor(intNewImgWidth * (intHeightSlike / intWidthSlike));
 		}
-
+		$("#container").css("top", Math.floor(intWindowLong - intNewImgHeight) / 2).css("left", Math.floor(intWindowShort - intNewImgWidth) / 2);
 	}
 	
 	intNewImgWidth = intNewImgWidth - odmik.poVisini;
@@ -134,7 +141,12 @@ function slikaNalozena(){
 		window_height : parseInt(intNewImgHeight)
 	}, {}, function() {
 		
-		$("#container").css("opacity", "1").css("top", Math.floor(($(window).height() - intNewImgHeight) / 2)).css("left", Math.floor(($(window).width() - intNewImgWidth) / 2));
+		
+		
+		$("#container").css("opacity", "1");
+		
+		
+		
 	});
 	
 	
