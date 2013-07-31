@@ -109,7 +109,7 @@ function onSuccess(imageURI) {
 	}
 
 	alert(intNewImgWidth + " x " + intNewImgHeight);
-
+	alert(intWindowRazmerje + " x " + intImgRazmerje);
 
 	$("#myImage").jqPuzzle({
 		window_width : parseInt(intNewImgWidth),
