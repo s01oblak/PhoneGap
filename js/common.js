@@ -1,8 +1,8 @@
 var strWindowOrientation = "";
 var strImageOrientation = "";
 var odmik = {
-		poVisini: 20,
-		poSirini: 20
+		poVisini: 0,
+		poSirini: 0
 	}
 	
 // Wait for device API libraries to load
@@ -19,7 +19,7 @@ function onDeviceReady() {
 	$("#container").css("opacity", "0");
 
 	$(window).on("orientationchange", function(event) {
-		//alert("This device is in " + event.orientation + " mode!");
+		//$("#stage").width($(document).width()).height($(document).height());
 	});
 	
 	$("#navigacija").bPopup();
@@ -66,9 +66,9 @@ function onSuccess(imageURI) {
 	$("#navigacija").bPopup().close();
 	//var image = document.getElementById('myImage');
 	//image.src = imageURI;
-	$("#container DIV").append('<img onload="slikaNalozena();" id="myImage" src="' + imageURI + '" />');
+	$("#container").append('<img onload="slikaNalozena();" id="myImage" src="' + imageURI + '" />');
 	
-	
+	//$("#stage").width($(document).width()).height($(document).height());
 
 	
 }
@@ -78,8 +78,8 @@ function slikaNalozena(){
 	var strWindowOrientation = dobiOrintacijoOkna();
 	var strImageOrientation = dobiOrintacijoSlike();
 	
-	odmik.poSirini = Math.floor($(window).width() / 20);
-	odmik.poVisini = Math.floor($(window).height() / 20);
+	//odmik.poSirini = Math.floor($(window).width() / 20);
+	//odmik.poVisini = Math.floor($(window).height() / 20);
 	
 	var intWindowRazmerje = 0;
 	//alert(typeof intWindowRazmerje);
@@ -128,7 +128,7 @@ function slikaNalozena(){
 		
 		
 		
-		$("#container").css("top", Math.floor(intWindowShort - intNewImgHeight) / 2).css("left", Math.floor(intWindowLong - intNewImgWidth) / 2);
+		//$("#container").css("top", Math.floor(intWindowShort - intNewImgHeight) / 2).css("left", Math.floor(intWindowLong - intNewImgWidth) / 2);
 		
 		
 		
@@ -143,7 +143,7 @@ function slikaNalozena(){
 			intNewImgWidth = intWindowShort;
 			intNewImgHeight = Math.floor(intNewImgWidth * (intHeightSlike / intWidthSlike));
 		}
-		$("#container").css("top", Math.floor(intWindowLong - intNewImgHeight) / 2).css("left", Math.floor(intWindowShort - intNewImgWidth) / 2);
+		//$("#container").css("top", Math.floor(intWindowLong - intNewImgHeight) / 2).css("left", Math.floor(intWindowShort - intNewImgWidth) / 2);
 	}
 	
 	intNewImgWidth = intNewImgWidth - odmik.poVisini;
