@@ -56,7 +56,7 @@ function onSuccess(imageURI) {
 	$("#navigacija").hide();
 	var image = document.getElementById('myImage');
 	image.src = imageURI;
-
+alert("1");
 	var strWindowOrientation = dobiOrintacijoOkna();
 	var strImageOrientation = dobiOrintacijoSlike(image);
 	
@@ -75,7 +75,7 @@ function onSuccess(imageURI) {
 	}else{
 		intImgRazmerje = image.width / image.height;
 	}
-	
+	alert("2");
 	
 	var intWidth = $(window).width();
 	var intHeight = $(window).height();
@@ -90,7 +90,7 @@ function onSuccess(imageURI) {
 		intWindowShort = intWidth;
 	}
 	
-	
+	alert("3");
 	
 	
 	
@@ -99,10 +99,12 @@ function onSuccess(imageURI) {
 	if (strImageOrientation == "landscape"){
 		
 		if (intImgRazmerje < intWindowRazmerje){
+			alert("a");
 			// zelo podolgovati - prilagaja se daljsa stranica
 			intNewImgWidth = intWindowLong;
 			intNewImgHeight = Math.floor(intNewImgWidth * intImgRazmerje);
 		}else{
+			alert("b");
 			intNewImgHeight = intWindowShort;
 			intNewImgWidth = Math.floor(intNewImgHeight * (image.width / image.height));
 		}
@@ -111,11 +113,13 @@ function onSuccess(imageURI) {
 		
 	}else{
 		if (intImgRazmerje < intWindowRazmerje){
+			alert("c");
 			// zelo podolgovati - prilagaja se daljsa stranica
 			intNewImgHeight = intWindowLong;
 			intNewImgWidth = Math.floor(intNewImgHeight * intImgRazmerje);
 			
 		}else{
+			alert("d");
 			intNewImgWidth = intWindowShort;
 			intNewImgHeight = Math.floor(intNewImgWidth * (image.height / image.width));
 		}
@@ -124,7 +128,7 @@ function onSuccess(imageURI) {
 		
 	}
 	
-	
+	alert("4");
 	
 	
 	
@@ -134,6 +138,7 @@ function onSuccess(imageURI) {
 		window_width : intNewImgWidth,
 		window_height : intNewImgHeight
 	}, {}, function() {
+		alert("5");
 		$("#container").css("opacity", "1");
 	});
 
