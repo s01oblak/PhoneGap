@@ -117,17 +117,15 @@ function onSuccess(imageURI) {
 
 	alert("4");
 
-/*
+
 	$("#myImage").jqPuzzle({
-		window_width : intNewImgWidth,
-		window_height : intNewImgHeight
+		//window_width : intNewImgWidth,
+		//window_height : intNewImgHeight
 	}, {}, function() {
 		alert("5");
 		$("#container").css("opacity", "1");
 	});
-*/
-	$("#myImage").jqPuzzle();
-	$("#container").css("opacity", "1");
+
 	
 }
 
