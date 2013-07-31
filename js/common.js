@@ -65,9 +65,11 @@ function onSuccess(imageURI) {
 	if (image.width > image.height) {
 		alert("1");
 		intImgRazmerje = image.height / image.width;
+		alert("1: " + intImgRazmerje + "   " + image.height + " x " + image.width);
 	} else {
 		alert("2");
 		intImgRazmerje = image.width / image.height;
+		alert("2: " + intImgRazmerje + "   " + image.height + " x " + image.width);
 	}
 	alert("r: " + intImgRazmerje);
 	var intWidth = $(window).width();
