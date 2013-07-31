@@ -12,7 +12,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 // device APIs are available
 //
 function onDeviceReady() {
-	navigator.screenOrientation.set('landscape');
+	
 	document.addEventListener("menubutton", onMenuButtonPress, false);
 
 	
@@ -162,7 +162,7 @@ function slikaNalozena(){
 		
 	});
 	
-	
+	navigator.screenOrientation.set('landscape');
 }
 
 
