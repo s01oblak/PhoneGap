@@ -50,3 +50,7 @@
 #container DIV{
 	border: 1px solid white;
 }
+
+#navigacija{
+	display: none;
+}

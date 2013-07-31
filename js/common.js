@@ -12,11 +12,17 @@ document.addEventListener("deviceready", onDeviceReady, false);
 // device APIs are available
 //
 function onDeviceReady() {
+	
+	document.addEventListener("menubutton", onMenuButtonPress, false);
+
+	
 	$("#container").css("opacity", "0");
 
 	$(window).on("orientationchange", function(event) {
 		//alert("This device is in " + event.orientation + " mode!");
 	});
+	
+	$("#navigacija").bPopup();
 
 	// FOTOAPARAT
 	$("#btnOpenCamera").click(function() {
@@ -49,8 +55,15 @@ function onDeviceReady() {
 
 }
 
+
+function onMenuButtonPress(){
+	
+	$("#navigacija").bPopup();
+	
+}
+
 function onSuccess(imageURI) {
-	$("#navigacija").hide();
+	$("#navigacija").bPopup().close();
 	//var image = document.getElementById('myImage');
 	//image.src = imageURI;
 	$("#container DIV").append('<img onload="slikaNalozena();" id="myImage" src="' + imageURI + '" />');
