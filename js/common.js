@@ -42,7 +42,8 @@ function onDeviceReady() {
 	// OBRNI
 	$("#btnObrni").click(function() {
 
-		navigator.screenOrientation.set('landscape');
+		//navigator.screenOrientation.set('landscape');
+		//$(body).rotate(90);
 
 	});
 
@@ -56,36 +57,117 @@ function onSuccess(imageURI) {
 	var image = document.getElementById('myImage');
 	image.src = imageURI;
 
-	if ($(document).width() > $(document).height()) {
-		strWindowOrientation = "landscape";
-	} else {
-		strWindowOrientation = "portrait";
+	var strWindowOrientation = dobiOrintacijoOkna();
+	var strImageOrientation = dobiOrintacijoSlike(image);
+	
+	var intWindowRazmerje = 0;
+	//alert(typeof intWindowRazmerje);
+	if ($(window).width() > $(window).height()){
+		intWindowRazmerje = $(window).height() / $(window).width();
+	}else{
+		intWindowRazmerje = $(window).width() / $(window).height();
 	}
-
-	if (image.width > image.height) {
-		strImageOrientation = "landscape";
-	} else {
-		strImageOrientation = "portrait";
+	
+	var intImgRazmerje = 0;
+	//alert(typeof intWindowRazmerje);
+	if (image.width > image.height){
+		intImgRazmerje = image.height / image.width;
+	}else{
+		intImgRazmerje = image.width / image.height;
 	}
-
+	
+	
 	var intWidth = $(window).width();
 	var intHeight = $(window).height();
-
-	if (strWindowOrientation != strImageOrientation) {
-		intWidth = $(window).height();
-		intHeight = $(window).width();
-		$(window).orientationchange();
+		
+	var intWindowLong = 0;
+	var intWindowShort = 0;
+	if (intWidth > intHeight){
+		intWindowLong = intWidth;
+		intWindowShort = intHeight;
+	}else{
+		intWindowLong = intHeight;
+		intWindowShort = intWidth;
 	}
+	
+	
+	
+	
+	
+	var intNewImgWidth = 0;
+	var intNewImgHeight = 0;
+	if (strImageOrientation == "landscape"){
+		
+		if (intImgRazmerje < intWindowRazmerje){
+			// zelo podolgovati - prilagaja se daljsa stranica
+			intNewImgWidth = intWindowLong;
+			intNewImgHeight = Math.floor(intNewImgWidth * intImgRazmerje);
+		}else{
+			intNewImgHeight = intWindowShort;
+			intNewImgWidth = Math.floor(intNewImgHeight * (image.width / image.height));
+		}
+		
+		
+		
+	}else{
+		if (intImgRazmerje < intWindowRazmerje){
+			// zelo podolgovati - prilagaja se daljsa stranica
+			intNewImgHeight = intWindowLong;
+			intNewImgWidth = Math.floor(intNewImgHeight * intImgRazmerje);
+			
+		}else{
+			intNewImgWidth = intWindowShort;
+			intNewImgHeight = Math.floor(intNewImgWidth * (image.height / image.width));
+		}
+			
+		
+		
+	}
+	
+	
+	
+	
+	
+	
 
 	$("#myImage").jqPuzzle({
-		window_width : intWidth,
-		window_height : intHeight
+		window_width : intNewImgWidth,
+		window_height : intNewImgHeight
 	}, {}, function() {
 		$("#container").css("opacity", "1");
 	});
 
 }
 
+
+
+
+
+
+
+
+
+
+
+
 function onFail(message) {
 	alert('Failed because: ' + message);
+}
+
+
+function dobiOrintacijoOkna(){
+	//alert($(document).width());
+	if ($(document).width() > $(document).height()) {
+		return "landscape";
+	} else {
+		return "portrait";
+	}
+}
+
+function dobiOrintacijoSlike(image){
+	if (image.width > image.height) {
+		return "landscape";
+	} else {
+		return "portrait";
+	}
 }
