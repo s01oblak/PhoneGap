@@ -119,8 +119,8 @@ function onSuccess(imageURI) {
 
 
 	$("#myImage").jqPuzzle({
-		//window_width : intNewImgWidth,
-		//window_height : intNewImgHeight
+		window_width : parseInt(intNewImgWidth),
+		window_height : parseInt(intNewImgHeight)
 	}, {}, function() {
 		alert("5");
 		$("#container").css("opacity", "1");
