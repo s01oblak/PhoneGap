@@ -94,7 +94,7 @@ function onSuccess(imageURI) {
 	
 	
 	
-	var intNewImgWidth = 0;
+	var intNewImgWidth = 0; 
 	var intNewImgHeight = 0;
 	if (strImageOrientation == "landscape"){
 		
