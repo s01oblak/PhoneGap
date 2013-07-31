@@ -8,7 +8,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 // device APIs are available
 //
 function onDeviceReady() {
-	$("#container").css("opacity", "0");
+	//$("#container").css("opacity", "0");
 
 	$(window).on("orientationchange", function(event) {
 		//alert("This device is in " + event.orientation + " mode!");
@@ -49,6 +49,8 @@ function onSuccess(imageURI) {
 	$("#navigacija").hide();
 	var image = document.getElementById('myImage');
 	image.src = imageURI;
+	
+	image.onLoad = function(){ alert("neki"); }
 	var strWindowOrientation = dobiOrintacijoOkna();
 	var strImageOrientation = dobiOrintacijoSlike(image);
 
