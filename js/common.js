@@ -47,12 +47,19 @@ function onDeviceReady() {
 
 function onSuccess(imageURI) {
 	$("#navigacija").hide();
-	var image = document.getElementById('myImage');
-	image.src = imageURI;
+	//var image = document.getElementById('myImage');
+	//image.src = imageURI;
+	$("#container").append('<img onload="slikaNalozena();" id="myImage" src="' + imageURI + '" />');
 	
+	
+
+	
+}
+
+function slikaNalozena(){
 	
 	var strWindowOrientation = dobiOrintacijoOkna();
-	var strImageOrientation = dobiOrintacijoSlike(image);
+	var strImageOrientation = dobiOrintacijoSlike();
 
 	var intWindowRazmerje = 0;
 	//alert(typeof intWindowRazmerje);
@@ -61,20 +68,23 @@ function onSuccess(imageURI) {
 	} else {
 		intWindowRazmerje = $(window).width() / $(window).height();
 	}
-
+	
+	var intHeightSlike = $("#myImage").height();
+	var intWidthSlike = $("#myImage").width();
+	
 	var intImgRazmerje = 0;
 	//alert(typeof intWindowRazmerje);
-	alert(image.Height + " " + image.height + " " + $("#myImage").height());
-	if (image.width > image.height) {
-		alert("1");
-		intImgRazmerje = image.height / image.width;
-		alert("1: " + intImgRazmerje + "   " + image.height + " x " + image.width);
+	//alert(image.Height + " " + image.height + " " + $("#myImage").height());
+	if (intWidthSlike > intHeightSlike) {
+		//alert("1");
+		intImgRazmerje = intHeightSlike / intWidthSlike;
+		//alert("1: " + intImgRazmerje + "   " + intHeightSlike + " x " + intWidthSlike);
 	} else {
-		alert("2");
-		intImgRazmerje = image.width / image.height;
-		alert("2: " + intImgRazmerje + "   " + image.height + " x " + image.width);
+		//alert("2");
+		intImgRazmerje = intWidthSlike / intHeightSlike;
+		//alert("2: " + intImgRazmerje + "   " + intHeightSlike + " x " + image.width);
 	}
-	alert("r: " + intImgRazmerje);
+	//alert("r: " + intImgRazmerje);
 	var intWidth = $(window).width();
 	var intHeight = $(window).height();
 
@@ -99,7 +109,7 @@ function onSuccess(imageURI) {
 			intNewImgHeight = Math.floor(intNewImgWidth * intImgRazmerje);
 		} else {
 			intNewImgHeight = intWindowShort;
-			intNewImgWidth = Math.floor(intNewImgHeight * (image.width / image.height));
+			intNewImgWidth = Math.floor(intNewImgHeight * (intWidthSlike / intHeightSlike));
 		}
 
 	} else {
@@ -110,13 +120,13 @@ function onSuccess(imageURI) {
 
 		} else {
 			intNewImgWidth = intWindowShort;
-			intNewImgHeight = Math.floor(intNewImgWidth * (image.height / image.width));
+			intNewImgHeight = Math.floor(intNewImgWidth * (intHeightSlike / intWidthSlike));
 		}
 
 	}
 
-	alert(intNewImgWidth + " x " + intNewImgHeight);
-	alert(intWindowRazmerje + " x " + intImgRazmerje);
+	//alert(intNewImgWidth + " x " + intNewImgHeight);
+	//alert(intWindowRazmerje + " x " + intImgRazmerje);
 
 	$("#myImage").jqPuzzle({
 		window_width : parseInt(intNewImgWidth),
@@ -124,9 +134,10 @@ function onSuccess(imageURI) {
 	}, {}, function() {
 		$("#container").css("opacity", "1");
 	});
-
+	
 	
 }
+
 
 function onFail(message) {
 	alert('Failed because: ' + message);
@@ -141,8 +152,8 @@ function dobiOrintacijoOkna() {
 	}
 }
 
-function dobiOrintacijoSlike(image) {
-	if (image.width > image.height) {
+function dobiOrintacijoSlike() {
+	if ($("#myImage").width() > $("#myImage").height()) {
 		return "landscape";
 	} else {
 		return "portrait";
