@@ -158,11 +158,12 @@ function slikaNalozena(){
 		
 		$("#container").css("opacity", "1");
 		
-		
+		navigator.screenOrientation.set('landscape');
+		alert("orientation");
 		
 	});
 	
-	navigator.screenOrientation.set('landscape');
+	
 }
 
 
