@@ -63,11 +63,13 @@ function onSuccess(imageURI) {
 	var intImgRazmerje = 0;
 	//alert(typeof intWindowRazmerje);
 	if (image.width > image.height) {
+		alert("1");
 		intImgRazmerje = image.height / image.width;
 	} else {
+		alert("2");
 		intImgRazmerje = image.width / image.height;
 	}
-	
+	alert("r: " + intImgRazmerje);
 	var intWidth = $(window).width();
 	var intHeight = $(window).height();
 
