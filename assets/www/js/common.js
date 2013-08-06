@@ -204,6 +204,7 @@ function slikaNalozena(){
 		$(document).dblclick(function(){
 			cropDblClick();
 		});
+		alert("notr");
 	});
 	
 	
