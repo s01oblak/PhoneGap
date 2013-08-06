@@ -192,7 +192,7 @@ function slikaNalozena(){
 	
 	$("#myImage").width(intNewImgWidth).height(intNewImgHeight).Jcrop({
 			allowSelect: false,
-			onDblClick:	 cropDblClick,
+			//onDblClick:	 cropDblClick,
 			onChange:	 spremeniCrop,
 			bgColor:     'black',
             bgOpacity:   .4,
@@ -201,7 +201,7 @@ function slikaNalozena(){
             aspectRatio: 1
 		
 	}, function(){
-		$(".jcrop-holder").click(function(){
+		$(document).dblclick(function(){
 			cropDblClick();
 		});
 	});
