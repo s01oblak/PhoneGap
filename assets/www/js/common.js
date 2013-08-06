@@ -2,9 +2,31 @@ var strWindowOrientation = "";
 var strImageOrientation = "";
 var odmik = {
 		poVisini: 0,
-		poSirini: 0
+		poSirini: 0,
+		crop: 0.9
 	}
-	
+var cropanaSlika = {
+	x: 0,
+	y: 0,
+	x2: 0,
+	y2: 0,
+	w: 0,
+	h: 0
+}
+
+var slika = {
+	width: 0,
+	height: 0
+}
+
+var zaslon = {
+	width: 0,
+	height: 0
+}
+
+var intMalaStran = 0;
+var intVelikaStran = 0;
+
 // Wait for device API libraries to load
 //
 document.addEventListener("deviceready", onDeviceReady, false);
@@ -15,6 +37,8 @@ function onDeviceReady() {
 	
 	document.addEventListener("menubutton", onMenuButtonPress, false);
 
+	$(document).on("dblclick", "div.jcrop-tracker", function(){ cropDblClick(); } );
+	
 	
 	//$("#container").css("opacity", "0");
 
@@ -157,7 +181,28 @@ function slikaNalozena(){
 	intNewImgWidth = intNewImgWidth - odmik.poVisini;
 	intNewImgHeight = intNewImgHeight - odmik.poSirini;
 	
-	$("#myImage").width(intNewImgWidth).height(intNewImgHeight).Jcrop();
+	
+	if (intNewImgWidth < intNewImgHeight){
+		intMalaStran = intNewImgWidth;
+		intVelikaStran = intNewImgHeight;
+	}else{
+		intMalaStran = intNewImgHeight;
+		intVelikaStran = intNewImgWidth;
+	}
+	
+	$("#myImage").width(intNewImgWidth).height(intNewImgHeight).Jcrop({
+			allowSelect: false,
+			onChange:	 spremeniCrop,
+			bgColor:     'black',
+            bgOpacity:   .4,
+            setSelect:   [ 	Math.floor( (intNewImgWidth/2) - ((intMalaStran/2) * odmik.crop )), Math.floor( (intNewImgHeight/2) - ((intMalaStran/2) * odmik.crop)),
+            				Math.floor( (intNewImgWidth/2) + ((intMalaStran/2) * odmik.crop)), Math.floor( (intNewImgHeight/2) + ((intMalaStran/2) * odmik.crop)) ],
+            aspectRatio: 1
+		
+	});
+	
+	slika.width = intNewImgWidth;
+	slika.height = intNewImgHeight;
 	
 	//$("#myImage").jqPuzzle({
 	//	window_width : parseInt(intNewImgWidth),
@@ -176,7 +221,12 @@ function slikaNalozena(){
 	
 }
 
-
+function spremeniCrop(c){
+	
+	cropanaSlika = c;
+	//alert(cropanaSlika.w);
+	//c.x, c.y, c.x2, c.y2, c.w, c.h
+}
 function onFail(message) {
 	alert('Failed because: ' + message);
 }
@@ -195,4 +245,29 @@ function dobiOrintacijoSlike() {
 	} else {
 		return "portrait";
 	}
+}
+
+function cropDblClick(){
+	
+	//alert(cropanaSlika.w);
+	var intRazmerje = cropanaSlika.w / intMalaStran;
+	var intRazmerje2 = intMalaStran / cropanaSlika.w;
+	
+	//var intRazmerjeHeight = cropanaSlika.h / intMalaStran;
+	
+	alert(intRazmerje);
+	var $cropanDiv = $('<div/>')
+				//.addClass('jqp-wrapper')
+				.css({	
+					width: intMalaStran,
+					height: intMalaStran,
+					backgroundImage: 'url("' + $("#myImage").attr("src") + '")',
+					backgroundSize: Math.floor(slika.width * intRazmerje2) + 'px ' + Math.floor(slika.height * intRazmerje2) + 'px',
+					backgroundPosition: '-' + Math.floor(cropanaSlika.x * intRazmerje2) + 'px -' + Math.floor(cropanaSlika.y * intRazmerje2) + 'px',
+					backgroundRepeat: 'no-repeat',
+					border: '1px solid black'
+				});
+	
+	$("#container").html($cropanDiv);
+	
 }
