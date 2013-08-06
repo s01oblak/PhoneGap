@@ -28,7 +28,7 @@ function onDeviceReady() {
 	$("#btnOpenCamera").click(function() {
 
 		navigator.camera.getPicture(onSuccess, onFail, {
-			quality : 50,
+			quality : 100,
 			destinationType : Camera.DestinationType.FILE_URI
 		});
 
@@ -38,7 +38,7 @@ function onDeviceReady() {
 	$("#btnOpenGalery").click(function() {
 
 		navigator.camera.getPicture(onSuccess, onFail, {
-			quality : 50,
+			quality : 100,
 			destinationType : navigator.camera.DestinationType.FILE_URI,
 			sourceType : navigator.camera.PictureSourceType.PHOTOLIBRARY
 		});
@@ -158,8 +158,8 @@ function slikaNalozena(){
 		
 		$("#container").css("opacity", "1");
 		
-		navigator.screenOrientation.set('landscape');
-		alert("orientation");
+		//window.navigator.screenOrientation.set('landscape');
+		//alert("orientation");
 		
 	});
 	
