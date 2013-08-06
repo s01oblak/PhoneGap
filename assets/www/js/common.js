@@ -191,7 +191,7 @@ function slikaNalozena(){
 	}
 	
 	$("#myImage").width(intNewImgWidth).height(intNewImgHeight).Jcrop({
-			allowSelect: false,
+			//allowSelect: false,
 			onDblClick:	 cropDblClick,
 			onChange:	 spremeniCrop,
 			bgColor:     'black',
