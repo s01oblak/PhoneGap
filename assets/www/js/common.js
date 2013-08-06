@@ -37,7 +37,7 @@ function onDeviceReady() {
 	
 	document.addEventListener("menubutton", onMenuButtonPress, false);
 
-	$(document).on("dblclick", "div.jcrop-tracker", function(){ cropDblClick(); } );
+	$(".jcrop-tracker").on("tap", function(){ cropDblClick(); } );
 	
 	
 	//$("#container").css("opacity", "0");
