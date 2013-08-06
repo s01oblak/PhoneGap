@@ -37,7 +37,7 @@ function onDeviceReady() {
 	
 	document.addEventListener("menubutton", onMenuButtonPress, false);
 
-	$(".jcrop-tracker").on("tap", function(){ cropDblClick(); } );
+	
 	
 	
 	//$("#container").css("opacity", "0");
@@ -192,6 +192,7 @@ function slikaNalozena(){
 	
 	$("#myImage").width(intNewImgWidth).height(intNewImgHeight).Jcrop({
 			allowSelect: false,
+			onDblClick:	 cropDblClick,
 			onChange:	 spremeniCrop,
 			bgColor:     'black',
             bgOpacity:   .4,
@@ -200,6 +201,7 @@ function slikaNalozena(){
             aspectRatio: 1
 		
 	});
+	
 	
 	slika.width = intNewImgWidth;
 	slika.height = intNewImgHeight;
@@ -255,7 +257,7 @@ function cropDblClick(){
 	
 	//var intRazmerjeHeight = cropanaSlika.h / intMalaStran;
 	
-	alert(intRazmerje);
+	//alert(intRazmerje);
 	var $cropanDiv = $('<div/>')
 				//.addClass('jqp-wrapper')
 				.css({	
