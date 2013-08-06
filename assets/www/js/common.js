@@ -16,7 +16,7 @@ function onDeviceReady() {
 	document.addEventListener("menubutton", onMenuButtonPress, false);
 
 	
-	$("#container").css("opacity", "0");
+	//$("#container").css("opacity", "0");
 
 	$(window).on("orientationchange", function(event) {
 		//$("#stage").width($(document).width()).height($(document).height());
@@ -67,11 +67,19 @@ function onSuccess(imageURI) {
 	//var image = document.getElementById('myImage');
 	//image.src = imageURI;
 	$("#container").append('<img onload="slikaNalozena();" id="myImage" src="' + imageURI + '" />');
+	//$("#container").append('<img width="200" height="200" onload="cropSliko();" id="myImage" src="' + imageURI + '" />');
 	
 	//$("#stage").width($(document).width()).height($(document).height());
 
 	
 }
+
+function cropSliko(){
+	
+	$("#myImage").Jcrop();
+	
+}
+
 
 function slikaNalozena(){
 	
@@ -149,19 +157,21 @@ function slikaNalozena(){
 	intNewImgWidth = intNewImgWidth - odmik.poVisini;
 	intNewImgHeight = intNewImgHeight - odmik.poSirini;
 	
-	$("#myImage").jqPuzzle({
-		window_width : parseInt(intNewImgWidth),
-		window_height : parseInt(intNewImgHeight)
-	}, {}, function() {
+	$("#myImage").width(intNewImgWidth).height(intNewImgHeight).Jcrop();
+	
+	//$("#myImage").jqPuzzle({
+	//	window_width : parseInt(intNewImgWidth),
+	//	window_height : parseInt(intNewImgHeight)
+	//}, {}, function() {
 		
 		
 		
-		$("#container").css("opacity", "1");
+		//$("#container").css("opacity", "1");
 		
 		//window.navigator.screenOrientation.set('landscape');
 		//alert("orientation");
 		
-	});
+	//});
 	
 	
 }
