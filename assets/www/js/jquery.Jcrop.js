@@ -355,8 +355,9 @@
           position: 'absolute',
           zIndex: 600
         }).dblclick(function(){
-          var c = Coords.getFixed();
-          options.onDblClick.call(api,c);
+          alert("znotraj!");
+          //var c = Coords.getFixed();
+          //options.onDblClick.call(api,c);
         }).insertBefore($img).append($img_holder, $hdl_holder); 
 
     if (img_mode) {
