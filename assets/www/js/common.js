@@ -36,7 +36,10 @@ document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady() {
 	
 	document.addEventListener("menubutton", onMenuButtonPress, false);
-
+	
+	$("#btnOKCrop").click(function(){
+		izbral2();
+	});
 	
 	
 	
@@ -192,7 +195,7 @@ function slikaNalozena(){
 	
 	$("#myImage").width(intNewImgWidth).height(intNewImgHeight).Jcrop({
 			allowSelect: false,
-			onSelect:	 izbral,
+			onSelect:	 function(){ $("#btnOKCrop").show(); },
 			onChange:	 spremeniCrop,
 			bgColor:     'black',
             bgOpacity:   .4,
@@ -200,6 +203,8 @@ function slikaNalozena(){
             				Math.floor( (intNewImgWidth/2) + ((intMalaStran/2) * odmik.crop)), Math.floor( (intNewImgHeight/2) + ((intMalaStran/2) * odmik.crop)) ],
             aspectRatio: 1
 		
+	}, function(){
+		$("#btnOKCrop").show();
 	});
 	
 	
@@ -226,6 +231,7 @@ function slikaNalozena(){
 function spremeniCrop(c){
 	
 	cropanaSlika = c;
+	$("#btnOKCrop").hide();
 	//alert(cropanaSlika.w);
 	//c.x, c.y, c.x2, c.y2, c.w, c.h
 }
@@ -250,7 +256,10 @@ function dobiOrintacijoSlike() {
 }
 
 function izbral(){
-	if (confirm("Ok?")){
+	
+}
+
+function izbral2(){
 		//alert(cropanaSlika.w);
 		var intRazmerje = cropanaSlika.w / intMalaStran;
 		var intRazmerje2 = intMalaStran / cropanaSlika.w;
@@ -271,6 +280,6 @@ function izbral(){
 					});
 		
 		$("#container").html($cropanDiv);
-	}
+	
 	
 }
