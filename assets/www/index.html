@@ -21,8 +21,11 @@
 
 		
 		<script>
-			$(document).ready(function(){
-				$("#test").dblclick(function(){
+		document.addEventListener("deviceready", onDeviceReady, false);
+		
+		function onDeviceReady(){
+			
+				$("#test").tap(function(){
 					alert("dela");
 				});
 				/*Jcrop({
@@ -36,7 +39,7 @@
 				}, function(){
 					//$(".jcrop-holder").dblclick(function(){ alert("fff"); });
 				});*/
-			});		
+			}	
 		</script>
 	</head>
 	<body>
