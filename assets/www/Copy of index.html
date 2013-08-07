@@ -19,23 +19,22 @@
 		<script src="js/jquery.Jcrop.js"></script>
 		<script type="text/javascript" charset="utf-8" src="pg-plugin-screen-orientation.js"></script>
 
-		
-		<script>
-			$(document).ready(function(){
-				$("#test").Jcrop({
-				allowSelect: false,
-				bgColor:     'black',
-	            bgOpacity:   .4,
-	            setSelect:   [ 	50,50,100,100 ],
-	            aspectRatio: 1
-			
-				});
-			});		
-		</script>
+		<script src="js/common.js"></script>
 	</head>
 	<body>
-		
-		<img src="s.jpg" id="test" />
-		
+		<div id="stage">
+			<div id="navigacija">
+				<div id="btnOpenCamera">
+					Slikaj!
+				</div>
+				<div id="btnOpenGalery">
+					Galerija
+				</div>
+				<!--div id="btnObrni">Obrni</div-->
+			</div>
+			<div id="container">
+
+			</div>
+		</div>
 	</body>
 </html>
