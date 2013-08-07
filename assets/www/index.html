@@ -27,7 +27,16 @@
 		function onDeviceReady(){
 			
 				$("#test").Jcrop({
-					onDblClick:	 function(){alert("tle pa dela pizda!");}
+				allowSelect: false,
+				onSelect:	 function(){alert("tle pa dela pizda!");},
+				bgColor:     'black',
+	            bgOpacity:   .4,
+	            setSelect:   [ 	50,50,200,200 ],
+	            aspectRatio: 1
+			
+				}, function(){
+					//$("body").live("click", function(){ alert("fff"); });
+					//alert("dela!");
 				});
 			}	
 		</script>
