@@ -22,21 +22,12 @@
 		
 		<script>
 		document.addEventListener("deviceready", onDeviceReady, false);
-		document.addEventListener("click", function(){ alert("1"); }, false);
+		//document.addEventListener("click", function(){ alert("1"); }, false);
 		
 		function onDeviceReady(){
 			
 				$("#test").Jcrop({
-				allowSelect: false,
-				//onDblClick:	 function(){alert("tle pa dela pizda!");},
-				bgColor:     'black',
-	            bgOpacity:   .4,
-	            setSelect:   [ 	50,50,200,200 ],
-	            aspectRatio: 1
-			
-				}, function(){
-					//$("body").live("click", function(){ alert("fff"); });
-					//alert("dela!");
+					onDblClick:	 function(){alert("tle pa dela pizda!");}
 				});
 			}	
 		</script>
