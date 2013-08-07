@@ -22,7 +22,10 @@
 		
 		<script>
 			$(document).ready(function(){
-				$("#test").Jcrop({
+				$("#test").dblclick(function(){
+					alert("dela");
+				});
+				/*Jcrop({
 				allowSelect: false,
 				//onDblClick:	 function(){alert("tle pa dela pizda!");},
 				bgColor:     'black',
@@ -32,7 +35,7 @@
 			
 				}, function(){
 					//$(".jcrop-holder").dblclick(function(){ alert("fff"); });
-				});
+				});*/
 			});		
 		</script>
 	</head>
