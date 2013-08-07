@@ -192,7 +192,7 @@ function slikaNalozena(){
 	
 	$("#myImage").width(intNewImgWidth).height(intNewImgHeight).Jcrop({
 			allowSelect: false,
-			//onDblClick:	 cropDblClick,
+			onSelect:	 izbral,
 			onChange:	 spremeniCrop,
 			bgColor:     'black',
             bgOpacity:   .4,
@@ -200,11 +200,6 @@ function slikaNalozena(){
             				Math.floor( (intNewImgWidth/2) + ((intMalaStran/2) * odmik.crop)), Math.floor( (intNewImgHeight/2) + ((intMalaStran/2) * odmik.crop)) ],
             aspectRatio: 1
 		
-	}, function(){
-		$(document).dblclick(function(){
-			cropDblClick();
-		});
-		alert("notr");
 	});
 	
 	
@@ -254,27 +249,28 @@ function dobiOrintacijoSlike() {
 	}
 }
 
-function cropDblClick(){
-	
-	//alert(cropanaSlika.w);
-	var intRazmerje = cropanaSlika.w / intMalaStran;
-	var intRazmerje2 = intMalaStran / cropanaSlika.w;
-	
-	//var intRazmerjeHeight = cropanaSlika.h / intMalaStran;
-	
-	//alert(intRazmerje);
-	var $cropanDiv = $('<div/>')
-				//.addClass('jqp-wrapper')
-				.css({	
-					width: intMalaStran,
-					height: intMalaStran,
-					backgroundImage: 'url("' + $("#myImage").attr("src") + '")',
-					backgroundSize: Math.floor(slika.width * intRazmerje2) + 'px ' + Math.floor(slika.height * intRazmerje2) + 'px',
-					backgroundPosition: '-' + Math.floor(cropanaSlika.x * intRazmerje2) + 'px -' + Math.floor(cropanaSlika.y * intRazmerje2) + 'px',
-					backgroundRepeat: 'no-repeat',
-					border: '1px solid black'
-				});
-	
-	$("#container").html($cropanDiv);
+function izbral(){
+	if (confirm("Ok?")){
+		//alert(cropanaSlika.w);
+		var intRazmerje = cropanaSlika.w / intMalaStran;
+		var intRazmerje2 = intMalaStran / cropanaSlika.w;
+		
+		//var intRazmerjeHeight = cropanaSlika.h / intMalaStran;
+		
+		//alert(intRazmerje);
+		var $cropanDiv = $('<div/>')
+					//.addClass('jqp-wrapper')
+					.css({	
+						width: intMalaStran,
+						height: intMalaStran,
+						backgroundImage: 'url("' + $("#myImage").attr("src") + '")',
+						backgroundSize: Math.floor(slika.width * intRazmerje2) + 'px ' + Math.floor(slika.height * intRazmerje2) + 'px',
+						backgroundPosition: '-' + Math.floor(cropanaSlika.x * intRazmerje2) + 'px -' + Math.floor(cropanaSlika.y * intRazmerje2) + 'px',
+						backgroundRepeat: 'no-repeat',
+						border: '1px solid black'
+					});
+		
+		$("#container").html($cropanDiv);
+	}
 	
 }
