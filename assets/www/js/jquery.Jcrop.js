@@ -354,6 +354,8 @@
         .css({
           position: 'absolute',
           zIndex: 600
+        }).dblclick(function(){
+          alert("znotraj");
         }).insertBefore($img).append($img_holder, $hdl_holder); 
 
     if (img_mode) {
