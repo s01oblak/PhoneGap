@@ -27,8 +27,16 @@ var zaslon = {
 var intMalaStran = 0;
 var intVelikaStran = 0;
 
+var strSlikaURL = "";
 // Wait for device API libraries to load
 //
+
+var intWidthZaSestavljanko = 0;
+var intHeightZaSestavljanko = 0;
+
+var intLeftZaSestavljanko = 0;
+var intTopZaSestavljanko = 0;
+
 document.addEventListener("deviceready", onDeviceReady, false);
 
 // device APIs are available
@@ -93,7 +101,9 @@ function onSuccess(imageURI) {
 	$("#navigacija").bPopup().close();
 	//var image = document.getElementById('myImage');
 	//image.src = imageURI;
-	$("#container").append('<img onload="slikaNalozena();" id="myImage" src="' + imageURI + '" />');
+	strSlikaURL = imageURI;
+	$("#container").append('<img onload="slikaNalozena();" id="myImage" src="' + strSlikaURL + '" />');
+	
 	//$("#container").append('<img width="200" height="200" onload="cropSliko();" id="myImage" src="' + imageURI + '" />');
 	
 	//$("#stage").width($(document).width()).height($(document).height());
@@ -211,19 +221,7 @@ function slikaNalozena(){
 	slika.width = intNewImgWidth;
 	slika.height = intNewImgHeight;
 	
-	//$("#myImage").jqPuzzle({
-	//	window_width : parseInt(intNewImgWidth),
-	//	window_height : parseInt(intNewImgHeight)
-	//}, {}, function() {
-		
-		
-		
-		//$("#container").css("opacity", "1");
-		
-		//window.navigator.screenOrientation.set('landscape');
-		//alert("orientation");
-		
-	//});
+	
 	
 	
 }
@@ -267,19 +265,63 @@ function izbral2(){
 		//var intRazmerjeHeight = cropanaSlika.h / intMalaStran;
 		
 		//alert(intRazmerje);
+		
+		intWidthZaSestavljanko = Math.floor(slika.width * intRazmerje2);
+		intHeightZaSestavljanko = Math.floor(slika.height * intRazmerje2);
+		
+		intLeftZaSestavljanko = Math.floor(cropanaSlika.x * intRazmerje2);
+		intTopZaSestavljanko = Math.floor(cropanaSlika.y * intRazmerje2);
+
 		var $cropanDiv = $('<div/>')
 					//.addClass('jqp-wrapper')
 					.css({	
 						width: intMalaStran,
 						height: intMalaStran,
 						backgroundImage: 'url("' + $("#myImage").attr("src") + '")',
-						backgroundSize: Math.floor(slika.width * intRazmerje2) + 'px ' + Math.floor(slika.height * intRazmerje2) + 'px',
-						backgroundPosition: '-' + Math.floor(cropanaSlika.x * intRazmerje2) + 'px -' + Math.floor(cropanaSlika.y * intRazmerje2) + 'px',
+						backgroundSize: intWidthZaSestavljanko + 'px ' + intHeightZaSestavljanko + 'px',
+						backgroundPosition: '-' + intLeftZaSestavljanko + 'px -' + intTopZaSestavljanko + 'px',
 						backgroundRepeat: 'no-repeat',
 						border: '1px solid black'
 					});
 		
-		$("#container").html($cropanDiv);
+		$("#container").html($cropanDiv).append('<div id="btnSestavljanka_zacni" style="cursor: pointer; position: absolute; top: 10px; right: 10px; z-index: 999999; background-color: green;">Začni</div>');
+	$("#btnSestavljanka_zacni").click(function(){
+		zacni_puzle();
+	});
 	
+	
+}
+
+function zacni_puzle(){
+	//alert("a dela?");
+	/*$("#myImage").jqPuzzle({
+		/*window_width : parseInt(intNewImgWidth),
+		window_height : parseInt(intNewImgHeight)
+		window_width : 100,
+		window_height : 100
+	}, {}, function() {
+		
+		
+		
+		//$("#container").css("opacity", "1");
+		
+		//window.navigator.screenOrientation.set('landscape');
+		////alert("orientation");
+		
+	});*/
+	$("#container").html('<img onload="slikaNalozena2_zacniSestavjanko();" id="myImage2" src="' + strSlikaURL + '" />');
+	//alert($("#myImage").width());
+	
+}
+
+function slikaNalozena2_zacniSestavjanko(){
+	$("#myImage2").jqPuzzle({
+		vidni_width : intMalaStran,
+		vidni_height : intMalaStran,
+		width_celotne_slike_po_cropanju: intWidthZaSestavljanko,
+		height_celotne_slike_po_cropanju: intHeightZaSestavljanko,
+		odmik_levo: intLeftZaSestavljanko,
+		odmik_zgoraj: intTopZaSestavljanko
+	});
 	
 }

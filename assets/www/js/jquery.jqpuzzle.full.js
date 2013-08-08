@@ -17,8 +17,12 @@ $.fn.jqPuzzle = function(settings, texts, callback) {
 		shuffle: false,				// initially show shuffled pieces [true|false]
 		numbers: false,				// initially show numbers on pieces [true|false]
 		language: 'en',				// language for gui elements [language code]
-		window_width: -1,
-		window_height: -1,
+		vidni_width : -1,
+		vidni_height : -1,
+		width_celotne_slike_po_cropanju: -1,
+		height_celotne_slike_po_cropanju: -1,
+		odmik_levo: -1,
+		odmik_zgoraj: -1,
 		
 		// display additional gui controls
 		control: {
@@ -319,9 +323,16 @@ $.fn.jqPuzzle = function(settings, texts, callback) {
 			
 			var width = 0;
 			var height = 0;
+		
+		/*	
+		vidni_width : -1,
+		vidni_height : -1,
+		width_celotne_slike_po_cropanju: -1,
+		height_celotne_slike_po_cropanju: -1,
+		*/
 			
 			// saso
-			if ((settings.window_width == -1) || (settings.window_height == -1)){
+			if ((settings.vidni_width == -1) || (settings.vidni_height == -1)){
 				$srcImg.css({width: 'auto', height: 'auto', visibility: 'visible'}); 
 				
 				// pieces width and height, based on original image size
@@ -334,8 +345,8 @@ $.fn.jqPuzzle = function(settings, texts, callback) {
 			
 				//width  = settings.window_width;
 				//height = settings.window_height;
-				width  = Math.floor((settings.window_width-coveredWidth) / cols);
-				height = Math.floor((settings.window_height-coveredHeight) / rows);
+				width  = Math.floor((settings.vidni_width-coveredWidth) / cols);
+				height = Math.floor((settings.vidni_height-coveredHeight) / rows);
 				//alert(width);
 			}
 			
@@ -553,7 +564,7 @@ $.fn.jqPuzzle = function(settings, texts, callback) {
 					width: width + boxModelHack.piece,
 					height: height + boxModelHack.piece,
 					backgroundImage: 'url(' + imgSrc + ')',
-					backgroundSize: settings.window_width + 'px ' + settings.window_height + 'px',
+					backgroundSize: settings.width_celotne_slike_po_cropanju + 'px ' + settings.height_celotne_slike_po_cropanju + 'px',
 					borderWidth: computedStyles.piece.border,
 					margin: 0,
 					padding: 0,
@@ -578,8 +589,8 @@ $.fn.jqPuzzle = function(settings, texts, callback) {
 					var offset = getOffset(i,j);
 
 					// calculate background offset
-					var bgLeft = -1 * (j*totalPieceWidth + computedStyles.piece.border);
-					var bgTop  = -1 * (i*totalPieceHeight + computedStyles.piece.border);
+					var bgLeft = -1 * ((j*totalPieceWidth + computedStyles.piece.border) + settings.odmik_levo);
+					var bgTop  = -1 * ((i*totalPieceHeight + computedStyles.piece.border) + settings.odmik_zgoraj);
 
 					// recalc if overlap
 					if(overlap) {
@@ -609,12 +620,12 @@ $.fn.jqPuzzle = function(settings, texts, callback) {
 			// create background (original image) inside wrapper
 			var $background = $('<div/>')
 				.css({
-					width: fullWidth,
-					height: fullHeight,
+					width: settings.vidni_width,
+					height: settings.vidni_height,
 					left: computedStyles.wrapper.padding,
 					top: computedStyles.wrapper.padding,
 					backgroundImage: 'url(' + imgSrc + ')',
-					backgroundSize: settings.window_width + 'px ' + settings.window_height + 'px',
+					backgroundSize: settings.vidni_width + 'px ' + settings.vidni_height + 'px',
 					borderWidth: 0,
 					margin: 0,
 					padding: 0,
