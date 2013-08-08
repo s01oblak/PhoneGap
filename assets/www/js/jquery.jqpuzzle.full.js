@@ -633,7 +633,7 @@ $.fn.jqPuzzle = function(settings, texts, callback) {
 					position: 'absolute',
 					opacity: style.backgroundOpacity
 				})
-				.prependTo($wrapper);
+				.prependTo($wrapper); 
 			
 			// create controls which will hold the buttons and the display
 			var $controls = $('<div/>')
