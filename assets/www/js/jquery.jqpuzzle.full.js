@@ -791,10 +791,12 @@ $.fn.jqPuzzle = function(settings, texts, callback) {
 				$(this).removeClass('jqp-down');	
 			});
 			
-			
+			$pieces.on("swipeleft", function(e) {
+				$(this).click();
+			});
 			
 			// swap pieces on click
-			$pieces.on("swipe", function() {
+			$pieces.on("click", function() {
 				// do nothing, if locked
 				if(lock) return false;
 				
