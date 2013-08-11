@@ -1,8 +1,8 @@
 var strWindowOrientation = "";
 var strImageOrientation = "";
 var odmik = {
-		poVisini: 1,
-		poSirini: 1,
+		poVisini: 0.9,
+		poSirini: 0.9,
 		crop: 0.7
 	}
 var cropanaSlika = {

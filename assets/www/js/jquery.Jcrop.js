@@ -1669,7 +1669,7 @@
     drawBorders: true,
     dragEdges: true,
     fixedSupport: true,
-    touchSupport: null,
+    touchSupport: true,
 
     shade: null,
 
