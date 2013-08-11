@@ -363,7 +363,7 @@ function izbral2(){
 					});
 		
 		$("#container").html($cropanDiv);	
-	
+		postaviGledeNaOrientacijo(dobiOrintacijoOkna());
 	
 	
 }
