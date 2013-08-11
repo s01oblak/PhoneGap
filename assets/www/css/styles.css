@@ -1,6 +1,6 @@
 BODY{
 	
-	background-color: #191919;
+	background-color: white;
 	padding: 0px;
 	margin: 0px;
 	
@@ -21,12 +21,17 @@ BODY{
 	width: 50px;
 }
 
+#stage{
+	position: relative;
+	padding: 0px;
+	margin: 0px;
+}
 
 #container{
-	margin-left:auto;
-	margin-right:auto;
-	text-align: center;
-	/*border-radius: 5px;*/
+	position: absolute;
+	background-color: white;
+	border: 1px solid black;
+	border-radius: 5px;
 }
 
 
@@ -38,9 +43,7 @@ BODY{
 	background-color: white;
 }
 
-#stage{
-	position: relative;
-}
+
 
 
 #btnOKCrop{

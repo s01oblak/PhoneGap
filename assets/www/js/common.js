@@ -3,7 +3,7 @@ var strImageOrientation = "";
 var odmik = {
 		poVisini: 0.9,
 		poSirini: 0.9,
-		crop: 0.9
+		crop: 0.7
 	}
 var cropanaSlika = {
 	x: 0,
@@ -61,7 +61,7 @@ function onDeviceReady() {
 
 	// FOTOAPARAT
 	$("#btnOpenCamera").click(function() {
-
+		$("#container").html('');
 		navigator.camera.getPicture(onSuccess, onFail, {
 			quality : 100,
 			correctOrientation: true,
@@ -74,7 +74,7 @@ function onDeviceReady() {
 
 	// GALERIJA
 	$("#btnOpenGalery").click(function() {
-
+		$("#container").html('');
 		navigator.camera.getPicture(onSuccess, onFail, {
 			quality : 100,
 			correctOrientation: true,
@@ -98,6 +98,7 @@ function onDeviceReady() {
 
 
 function onMenuButtonPress(){
+	
 	
 	$("#navigacija").bPopup();
 	
@@ -197,8 +198,14 @@ function slikaNalozena(){
 		//$("#container").css("top", Math.floor(intWindowLong - intNewImgHeight) / 2).css("left", Math.floor(intWindowShort - intNewImgWidth) / 2);
 	}
 	
-	intNewImgWidth = intNewImgWidth - odmik.poVisini;
-	intNewImgHeight = intNewImgHeight - odmik.poSirini;
+	
+	var intPaddingContainerja = Math.floor(intNewImgWidth * (1 - odmik.poSirini) / 4);
+	$("#container").css("padding", intPaddingContainerja + "px").css("top", Math.floor(intPaddingContainerja));
+	$("#container").css("left", Math.floor(  ($(document).width() / 2) - ($("#container").outerWidth() / 2) ));
+	
+	intNewImgWidth = intNewImgWidth - odmik.poSirini - intPaddingContainerja * 4;
+	intNewImgHeight = intNewImgHeight - odmik.poVisini - intPaddingContainerja * 4;
+	
 	
 	
 	if (intNewImgWidth < intNewImgHeight){
@@ -286,8 +293,8 @@ function izbral2(){
 						backgroundImage: 'url("' + $("#myImage").attr("src") + '")',
 						backgroundSize: intWidthZaSestavljanko + 'px ' + intHeightZaSestavljanko + 'px',
 						backgroundPosition: '-' + intLeftZaSestavljanko + 'px -' + intTopZaSestavljanko + 'px',
-						backgroundRepeat: 'no-repeat',
-						border: '1px solid black'
+						backgroundRepeat: 'no-repeat'
+						//border: '1px solid black'
 					});
 		
 		$("#container").html($cropanDiv).append('<div id="btnSestavljanka_zacni" style="cursor: pointer; position: absolute; top: 10px; right: 10px; z-index: 999999; background-color: green;">Začni</div>');
