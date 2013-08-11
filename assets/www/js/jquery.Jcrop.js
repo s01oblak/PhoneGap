@@ -325,8 +325,8 @@
 
     presize($img, options.boxWidth, options.boxHeight);
 
-    var boundx = $img.width(),
-        boundy = $img.height(),
+    var boundx = $img.innerWidth(),
+        boundy = $img.innerHeight(),
         
         
         $div = $('<div />').width(boundx).height(boundy).addClass(cssClass('holder')).css({
