@@ -244,9 +244,6 @@ function slikaNalozena(){
 		
 		
 		
-		//$("#container").css("top", Math.floor(intWindowShort - intNewImgHeight) / 2).css("left", Math.floor(intWindowLong - intNewImgWidth) / 2);
-		
-		
 		
 
 	} else {
@@ -259,12 +256,14 @@ function slikaNalozena(){
 			intNewImgWidth = intWindowShort;
 			intNewImgHeight = Math.floor(intNewImgWidth * (intHeightSlike / intWidthSlike));
 		}
-		//$("#container").css("top", Math.floor(intWindowLong - intNewImgHeight) / 2).css("left", Math.floor(intWindowShort - intNewImgWidth) / 2);
 	}
 	
 	
 	var intPaddingContainerja = Math.floor(intNewImgWidth * (1 - odmik.poSirini) / 4);
-	nacintrerajContainer();
+	$("#container").css("padding", intPaddingContainerja + "px");
+	
+	//nacintrerajContainer();
+	postaviGledeNaOrientacijo(dobiOrintacijoOkna());
 	
 	intNewImgWidth = intNewImgWidth - odmik.poSirini - intPaddingContainerja * 4;
 	intNewImgHeight = intNewImgHeight - odmik.poVisini - intPaddingContainerja * 4;
@@ -336,13 +335,8 @@ function izbral(){
 }
 
 function izbral2(){
-		//alert(cropanaSlika.w);
 		var intRazmerje = cropanaSlika.w / intMalaStran;
 		var intRazmerje2 = intMalaStran / cropanaSlika.w;
-		
-		//var intRazmerjeHeight = cropanaSlika.h / intMalaStran;
-		
-		//alert(intRazmerje);
 		
 		intWidthZaSestavljanko = Math.floor(slika.width * intRazmerje2);
 		intHeightZaSestavljanko = Math.floor(slika.height * intRazmerje2);
@@ -351,7 +345,6 @@ function izbral2(){
 		intTopZaSestavljanko = Math.floor(cropanaSlika.y * intRazmerje2);
 
 		var $cropanDiv = $('<div/>')
-					//.addClass('jqp-wrapper')
 					.css({	
 						width: intMalaStran,
 						height: intMalaStran,
@@ -359,7 +352,6 @@ function izbral2(){
 						backgroundSize: intWidthZaSestavljanko + 'px ' + intHeightZaSestavljanko + 'px',
 						backgroundPosition: '-' + intLeftZaSestavljanko + 'px -' + intTopZaSestavljanko + 'px',
 						backgroundRepeat: 'no-repeat'
-						//border: '1px solid black'
 					});
 		
 		
@@ -369,24 +361,7 @@ function izbral2(){
 }
 
 function zacni_puzle(){
-	//alert("a dela?");
-	/*$("#myImage").jqPuzzle({
-		/*window_width : parseInt(intNewImgWidth),
-		window_height : parseInt(intNewImgHeight)
-		window_width : 100,
-		window_height : 100
-	}, {}, function() {
-		
-		
-		
-		//$("#container").css("opacity", "1");
-		
-		//window.navigator.screenOrientation.set('landscape');
-		////alert("orientation");
-		
-	});*/
 	$("#container").html('<img onload="slikaNalozena2_zacniSestavjanko();" id="myImage2" src="' + strSlikaURL + '" />');
-	//alert($("#myImage").width());
 	
 }
 
@@ -407,26 +382,29 @@ function spremembaOrientacije(event){
 }
 
 function postaviGledeNaOrientacijo(strOrientacija){
-	zaslon.width = $(document).width();
-	zaslon.height = $(document).height();
-	nacintrerajContainer();
+	//zaslon.width = $(document).width();
+	//zaslon.height = $(document).height();
+	//nacintrerajContainer();
 	
 	if (strOrientacija == "landscape"){
 		$("#div_btnOK").css("top", "10px").css("left","10px");
 		$("#div_btnBack").css("top", "10px").css("right","10px");
 		
+		$("#container").css("left", Math.floor((zaslon.vecja - $("#container").outerWidth()) / 2) + "px");
+		$("#container").css("top", Math.floor((zaslon.manjsa - $("#container").outerHeight()) / 2) + "px");
+		
 	}else{
 		$("#div_btnOK").css("top", zaslon.vecja - $("#div_btnOK").outerHeight() - 10 + "px").css("left","10px");
 		$("#div_btnBack").css("top", zaslon.vecja - $("#div_btnBack").outerHeight() - 10 + "px").css("right","10px");
 		
+		$("#container").css("left", Math.floor((zaslon.manjsa - $("#container").outerWidth()) / 2) + "px");
+		$("#container").css("top", Math.floor((zaslon.vecja - $("#container").outerHeight()) / 2) + "px");
 	}
 }
 
 function nacintrerajContainer(){
-	//alert(Math.floor(($(document).width() / 2) - 60 - ($("#container").outerWidth() / 2)));
 	$("#container").css("left", Math.floor((zaslon.width - $("#container").outerWidth()) / 2) + "px");
-	//alert(Math.floor((zaslon.width / 2) - ($("#container").outerWidth() / 2)) + "px");
-	//$("#container").css("left", 0 + "px");
+	$("#container").css("top", Math.floor((zaslon.height - $("#container").outerHeight()) / 2) + "px");
 	
 }
 
