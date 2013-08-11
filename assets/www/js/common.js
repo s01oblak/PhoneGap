@@ -14,6 +14,10 @@ var cropanaSlika = {
 	h: 0
 }
 
+strVir = "";
+
+var strAcc = "0";
+
 var slika = {
 	width: 0,
 	height: 0
@@ -42,11 +46,44 @@ document.addEventListener("deviceready", onDeviceReady, false);
 // device APIs are available
 //
 function onDeviceReady() {
-	
 	document.addEventListener("menubutton", onMenuButtonPress, false);
 	
-	$("#btnOKCrop").click(function(){
-		izbral2();
+	postaviGledeNaOrientacijo(dobiOrintacijoOkna());
+	
+	
+	$("#btnOK").click(function(){
+		if (strAcc == "1"){
+			zacni_puzle();
+			strAcc = "2";
+		}
+		
+		if (strAcc == "0"){
+			izbral2();
+			strAcc = "1";
+		}
+		
+		
+		
+	});
+	
+	$("#btnBack").click(function(){
+		if (strAcc == "2"){
+			$("#container").html('<img onload="slikaNalozena();" id="myImage" src="' + strSlikaURL + '" />');
+			strAcc = "1";
+		}
+		
+		if (strAcc == "1"){
+			$("#container").html('<img onload="slikaNalozena();" id="myImage" src="' + strSlikaURL + '" />');
+			//strAcc = "2";
+		}
+		
+		if (strAcc == "0"){
+			strVir();
+			//strAcc = "1";
+		}
+		
+		
+		
 	});
 	
 	
@@ -54,36 +91,21 @@ function onDeviceReady() {
 	//$("#container").css("opacity", "0");
 
 	$(window).on("orientationchange", function(event) {
-		//$("#stage").width($(document).width()).height($(document).height());
+		spremembaOrientacije(event);
 	});
 	
 	$("#navigacija").bPopup();
 
 	// FOTOAPARAT
 	$("#btnOpenCamera").click(function() {
-		$("#container").html('');
-		navigator.camera.getPicture(onSuccess, onFail, {
-			quality : 100,
-			correctOrientation: true,
-			destinationType : Camera.DestinationType.FILE_URI,
-			targetWidth: 800,
-  			targetHeight: 800
-		});
-
+		strVir = zacniKamera;
+		zacniKamera();
 	});
 
 	// GALERIJA
 	$("#btnOpenGalery").click(function() {
-		$("#container").html('');
-		navigator.camera.getPicture(onSuccess, onFail, {
-			quality : 100,
-			correctOrientation: true,
-			destinationType : navigator.camera.DestinationType.FILE_URI,
-			sourceType : navigator.camera.PictureSourceType.PHOTOLIBRARY,
-			targetWidth: 800,
-  			targetHeight: 800
-		});
-
+		strVir = odpriGalerija;
+		odpriGalerija();
 	});
 
 	// OBRNI
@@ -96,6 +118,27 @@ function onDeviceReady() {
 
 }
 
+function zacniKamera(){
+	navigator.camera.getPicture(onSuccess, onFail, {
+		quality : 100,
+		correctOrientation: true,
+		destinationType : Camera.DestinationType.FILE_URI,
+		targetWidth: 800,
+		targetHeight: 800
+	});	
+}
+
+function odpriGalerija(){
+	navigator.camera.getPicture(onSuccess, onFail, {
+		quality : 100,
+		correctOrientation: true,
+		destinationType : navigator.camera.DestinationType.FILE_URI,
+		sourceType : navigator.camera.PictureSourceType.PHOTOLIBRARY,
+		targetWidth: 800,
+		targetHeight: 800
+	});
+}
+
 
 function onMenuButtonPress(){
 	
@@ -106,10 +149,12 @@ function onMenuButtonPress(){
 
 function onSuccess(imageURI) {
 	$("#navigacija").bPopup().close();
+	
 	//var image = document.getElementById('myImage');
 	//image.src = imageURI;
 	strSlikaURL = imageURI;
-	$("#container").append('<img onload="slikaNalozena();" id="myImage" src="' + strSlikaURL + '" />');
+	$("#container").html('');
+	$("#container").html('<img onload="slikaNalozena();" id="myImage" src="' + strSlikaURL + '" />');
 	
 	//$("#container").append('<img width="200" height="200" onload="cropSliko();" id="myImage" src="' + imageURI + '" />');
 	
@@ -126,7 +171,10 @@ function cropSliko(){
 
 
 function slikaNalozena(){
-	
+	//
+		
+	$("#div_btnOK").show();
+	$("#div_btnBack").show();
 	var strWindowOrientation = dobiOrintacijoOkna();
 	var strImageOrientation = dobiOrintacijoSlike();
 	
@@ -218,7 +266,7 @@ function slikaNalozena(){
 	
 	$("#myImage").width(intNewImgWidth).height(intNewImgHeight).Jcrop({
 			allowSelect: false,
-			onSelect:	 function(){ $("#btnOKCrop").show(); },
+			onSelect:	 function(){ $("#div_btnOK").show(); },
 			onChange:	 spremeniCrop,
 			bgColor:     'black',
             bgOpacity:   .4,
@@ -227,7 +275,7 @@ function slikaNalozena(){
             aspectRatio: 1
 		
 	}, function(){
-		$("#div_btnOKCrop").show();
+		$("#div_btnOK").show();
 	});
 	
 	
@@ -251,11 +299,13 @@ function onFail(message) {
 }
 
 function dobiOrintacijoOkna() {
+	//alert($(document).width() + " x " + $(document).height());
 	if ($(document).width() > $(document).height()) {
 		return "landscape";
 	} else {
 		return "portrait";
 	}
+	
 }
 
 function dobiOrintacijoSlike() {
@@ -298,9 +348,7 @@ function izbral2(){
 					});
 		
 		$("#container").html($cropanDiv).append('<div id="btnSestavljanka_zacni" style="cursor: pointer; position: absolute; top: 10px; right: 10px; z-index: 999999; background-color: green;">Začni</div>');
-	$("#btnSestavljanka_zacni").click(function(){
-		zacni_puzle();
-	});
+	
 	
 	
 }
@@ -337,4 +385,28 @@ function slikaNalozena2_zacniSestavjanko(){
 		odmik_zgoraj: intTopZaSestavljanko
 	});
 	
+}
+
+function spremembaOrientacije(event){
+	postaviGledeNaOrientacijo(event.orientation);
+}
+
+function postaviGledeNaOrientacijo(strOrientacija){
+	if (strOrientacija == "landscape"){
+		
+		$("#div_btnOK").css("top", "10px").css("left","10px");
+		$("#div_btnBack").css("top", "10px").css("right","10px");
+		
+	}else{
+		//alert("d");
+		$("#div_btnOK").css({
+			top: 'auto',
+			bottom: 10,
+			left: 10
+		});
+		//alert($(document).height() - $("#div_btnOK").outerHeight() - 10 + "px");
+		$("#div_btnOK").css("top", $(document).height() - $("#div_btnOK").outerHeight() - 10 + "px").css("left","10px");
+		$("#div_btnBack").css("top", $(document).height() - $("#div_btnBack").outerHeight() - 10 + "px").css("right","10px");
+		
+	}
 }

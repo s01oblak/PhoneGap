@@ -32,6 +32,8 @@ BODY{
 	background-color: white;
 	border: 1px solid black;
 	border-radius: 5px;
+	box-shadow: 5px 5px black 5px; 
+	z-index: 9999999; 
 }
 
 
@@ -46,10 +48,8 @@ BODY{
 
 
 
-#div_btnOKCrop{
+#div_btnOK, #div_btnBack{
 	position: absolute;
-	top: 10px;
-	left: 10px;
 	z-index: 9999999; 
 	display: none;
 }
