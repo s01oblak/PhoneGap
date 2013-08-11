@@ -78,7 +78,7 @@ function onDeviceReady() {
 			strAcc = "1";
 		}
 		
-		
+		postaviGledeNaOrientacijo(dobiOrintacijoOkna());
 		
 	});
 	
@@ -402,11 +402,6 @@ function postaviGledeNaOrientacijo(strOrientacija){
 	}
 }
 
-function nacintrerajContainer(){
-	$("#container").css("left", Math.floor((zaslon.width - $("#container").outerWidth()) / 2) + "px");
-	$("#container").css("top", Math.floor((zaslon.height - $("#container").outerHeight()) / 2) + "px");
-	
-}
 
 
 
