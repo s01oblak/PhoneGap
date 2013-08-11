@@ -64,6 +64,7 @@ function onDeviceReady() {
 
 		navigator.camera.getPicture(onSuccess, onFail, {
 			quality : 100,
+			correctOrientation: true,
 			destinationType : Camera.DestinationType.FILE_URI
 		});
 
@@ -74,6 +75,7 @@ function onDeviceReady() {
 
 		navigator.camera.getPicture(onSuccess, onFail, {
 			quality : 100,
+			correctOrientation: true,
 			destinationType : navigator.camera.DestinationType.FILE_URI,
 			sourceType : navigator.camera.PictureSourceType.PHOTOLIBRARY
 		});
