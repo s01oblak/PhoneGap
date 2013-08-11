@@ -50,7 +50,6 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 
 function onBackButton(){
-	alert("fff");
 	//if (boolMeniOdprt){
 		$("#navigacija").bPopup().close();
 	//}
