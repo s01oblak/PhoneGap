@@ -1,8 +1,8 @@
 var strWindowOrientation = "";
 var strImageOrientation = "";
 var odmik = {
-		poVisini: 0.9,
-		poSirini: 0.9,
+		poVisini: 1,
+		poSirini: 1,
 		crop: 0.7
 	}
 var cropanaSlika = {
@@ -71,32 +71,39 @@ function onDeviceReady() {
 		if (strAcc == "1"){
 			zacni_puzle();
 			strAcc = "2";
+			$(this).hide();
+			$("#btnBack").hide();
+			
 		}
 		
 		if (strAcc == "0"){
 			izbral2();
 			strAcc = "1";
 		}
-		
-		postaviGledeNaOrientacijo(dobiOrintacijoOkna());
+		//alert(strAcc);
+		//postaviGledeNaOrientacijo(dobiOrintacijoOkna());
 		
 	});
 	
 	$("#btnBack").click(function(){
+		if (strAcc == "0"){
+			strVir();
+			//strAcc = "1";
+		}
+		
+		if (strAcc == "1"){
+			$("#container").html('<img onload="slikaNalozena();" id="myImage" src="' + strSlikaURL + '" />');
+			strAcc = "0";
+		}
+		
 		if (strAcc == "2"){
 			$("#container").html('<img onload="slikaNalozena();" id="myImage" src="' + strSlikaURL + '" />');
 			strAcc = "1";
 		}
 		
-		if (strAcc == "1"){
-			$("#container").html('<img onload="slikaNalozena();" id="myImage" src="' + strSlikaURL + '" />');
-			//strAcc = "2";
-		}
 		
-		if (strAcc == "0"){
-			strVir();
-			//strAcc = "1";
-		}
+		
+		
 		
 		
 		
@@ -335,6 +342,7 @@ function izbral(){
 }
 
 function izbral2(){
+	
 		var intRazmerje = cropanaSlika.w / intMalaStran;
 		var intRazmerje2 = intMalaStran / cropanaSlika.w;
 		
@@ -354,7 +362,7 @@ function izbral2(){
 						backgroundRepeat: 'no-repeat'
 					});
 		
-		
+		$("#container").html($cropanDiv);	
 	
 	
 	
