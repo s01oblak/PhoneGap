@@ -46,14 +46,11 @@ BODY{
 
 
 
-#btnOKCrop{
+#div_btnOKCrop{
 	position: absolute;
 	top: 10px;
 	left: 10px;
-	width: 20px;
-	height: 20px;
-	background-color: green;
 	z-index: 9999999; 
 	display: none;
-	cursor: pointer;
 }
+

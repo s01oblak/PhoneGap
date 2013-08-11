@@ -227,7 +227,7 @@ function slikaNalozena(){
             aspectRatio: 1
 		
 	}, function(){
-		$("#btnOKCrop").show();
+		$("#div_btnOKCrop").show();
 	});
 	
 	
