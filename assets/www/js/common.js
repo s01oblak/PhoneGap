@@ -1,8 +1,8 @@
 var strWindowOrientation = "";
 var strImageOrientation = "";
 var odmik = {
-		poVisini: 1,
-		poSirini: 1,
+		poVisini: 0.9,
+		poSirini: 0.9,
 		crop: 0.7
 	}
 var cropanaSlika = {
@@ -347,7 +347,7 @@ function izbral2(){
 						//border: '1px solid black'
 					});
 		
-		$("#container").html($cropanDiv).append('<div id="btnSestavljanka_zacni" style="cursor: pointer; position: absolute; top: 10px; right: 10px; z-index: 999999; background-color: green;">Začni</div>');
+		
 	
 	
 	
@@ -377,10 +377,10 @@ function zacni_puzle(){
 
 function slikaNalozena2_zacniSestavjanko(){
 	$("#myImage2").jqPuzzle({
-		vidni_width : Math.floor(intMalaStran * odmik.poSirini),
-		vidni_height : Math.floor(intMalaStran * odmik.poVisini),
-		width_celotne_slike_po_cropanju: Math.floor(intWidthZaSestavljanko * odmik.poSirini),
-		height_celotne_slike_po_cropanju: Math.floor(intHeightZaSestavljanko * odmik.poVisini),
+		vidni_width : Math.floor(intMalaStran),
+		vidni_height : Math.floor(intMalaStran),
+		width_celotne_slike_po_cropanju: Math.floor(intWidthZaSestavljanko),
+		height_celotne_slike_po_cropanju: Math.floor(intHeightZaSestavljanko),
 		odmik_levo: intLeftZaSestavljanko,
 		odmik_zgoraj: intTopZaSestavljanko
 	});
