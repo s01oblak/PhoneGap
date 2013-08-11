@@ -25,7 +25,9 @@ var slika = {
 
 var zaslon = {
 	width: 0,
-	height: 0
+	height: 0,
+	vecja: 0,
+	manjsa: 0
 }
 
 var intMalaStran = 0;
@@ -41,12 +43,26 @@ var intHeightZaSestavljanko = 0;
 var intLeftZaSestavljanko = 0;
 var intTopZaSestavljanko = 0;
 
+
+
 document.addEventListener("deviceready", onDeviceReady, false);
 
 // device APIs are available
 //
 function onDeviceReady() {
 	document.addEventListener("menubutton", onMenuButtonPress, false);
+	
+	zaslon.width = $(window).width();
+	zaslon.height = $(window).height();
+	
+	if (zaslon.width > zaslon.height){
+		zaslon.vecja = zaslon.width;
+		zaslon.manjsa = zaslon.height;
+	}else{
+		zaslon.manjsa = zaslon.width;
+		zaslon.vecja = zaslon.height;
+	}
+	
 	
 	postaviGledeNaOrientacijo(dobiOrintacijoOkna());
 	
@@ -405,8 +421,8 @@ function postaviGledeNaOrientacijo(strOrientacija){
 			left: 10
 		});
 		//alert($(document).height() - $("#div_btnOK").outerHeight() - 10 + "px");
-		$("#div_btnOK").css("top", $(document).height() - $("#div_btnOK").outerHeight() - 10 + "px").css("left","10px");
-		$("#div_btnBack").css("top", $(document).height() - $("#div_btnBack").outerHeight() - 10 + "px").css("right","10px");
+		$("#div_btnOK").css("top", zaslon.vecja - $("#div_btnOK").outerHeight() - 10 + "px").css("left","10px");
+		$("#div_btnBack").css("top", zaslon.vecja - $("#div_btnBack").outerHeight() - 10 + "px").css("right","10px");
 		
 	}
 }
