@@ -793,6 +793,12 @@ $.fn.jqPuzzle = function(settings, texts, callback) {
 			
 			$pieces.on("swipeleft", function(e) {
 				$(this).click();
+			}).on("swiperight", function(e) {
+				$(this).click();
+			}).on("swipeup", function(e) {
+				$(this).click();
+			}).on("swipedown", function(e) {
+				$(this).click();
 			});
 			
 			// swap pieces on click
