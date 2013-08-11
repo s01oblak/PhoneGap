@@ -264,8 +264,7 @@ function slikaNalozena(){
 	
 	
 	var intPaddingContainerja = Math.floor(intNewImgWidth * (1 - odmik.poSirini) / 4);
-	$("#container").css("padding", intPaddingContainerja + "px").css("top", Math.floor(intPaddingContainerja));
-	$("#container").css("left", Math.floor(  ($(document).width() / 2) - ($("#container").outerWidth() / 2) ));
+	nacintrerajContainer();
 	
 	intNewImgWidth = intNewImgWidth - odmik.poSirini - intPaddingContainerja * 4;
 	intNewImgHeight = intNewImgHeight - odmik.poVisini - intPaddingContainerja * 4;
@@ -408,21 +407,32 @@ function spremembaOrientacije(event){
 }
 
 function postaviGledeNaOrientacijo(strOrientacija){
+	zaslon.width = $(document).width();
+	zaslon.height = $(document).height();
+	nacintrerajContainer();
+	
 	if (strOrientacija == "landscape"){
-		
 		$("#div_btnOK").css("top", "10px").css("left","10px");
 		$("#div_btnBack").css("top", "10px").css("right","10px");
 		
 	}else{
-		//alert("d");
-		$("#div_btnOK").css({
-			top: 'auto',
-			bottom: 10,
-			left: 10
-		});
-		//alert($(document).height() - $("#div_btnOK").outerHeight() - 10 + "px");
 		$("#div_btnOK").css("top", zaslon.vecja - $("#div_btnOK").outerHeight() - 10 + "px").css("left","10px");
 		$("#div_btnBack").css("top", zaslon.vecja - $("#div_btnBack").outerHeight() - 10 + "px").css("right","10px");
 		
 	}
 }
+
+function nacintrerajContainer(){
+	//alert(Math.floor(($(document).width() / 2) - 60 - ($("#container").outerWidth() / 2)));
+	$("#container").css("left", Math.floor((zaslon.width - $("#container").outerWidth()) / 2) + "px");
+	//alert(Math.floor((zaslon.width / 2) - ($("#container").outerWidth() / 2)) + "px");
+	//$("#container").css("left", 0 + "px");
+	
+}
+
+
+
+
+
+
+
