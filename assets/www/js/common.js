@@ -47,9 +47,19 @@ var intTopZaSestavljanko = 0;
 
 document.addEventListener("deviceready", onDeviceReady, false);
 
+
+
+function onBackButton(){
+	alert("fff");
+	//if (boolMeniOdprt){
+		$("#navigacija").bPopup().close();
+	//}
+}
+
 // device APIs are available
 //
 function onDeviceReady() {
+	document.addEventListener("backbutton", onBackButton, false);
 	document.addEventListener("menubutton", onMenuButtonPress, false);
 	
 	zaslon.width = $(window).width();

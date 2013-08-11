@@ -33,7 +33,7 @@ BODY{
 	border: 1px solid black;
 	border-radius: 5px;
 	box-shadow: 5px 5px black 5px; 
-	z-index: 9999999; 
+	z-index: 99; 
 }
 
 
@@ -50,7 +50,7 @@ BODY{
 
 #div_btnOK, #div_btnBack{
 	position: absolute;
-	z-index: 9999999; 
+	z-index: 100; 
 	display: none;
 }
 
