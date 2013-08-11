@@ -65,7 +65,9 @@ function onDeviceReady() {
 		navigator.camera.getPicture(onSuccess, onFail, {
 			quality : 100,
 			correctOrientation: true,
-			destinationType : Camera.DestinationType.FILE_URI
+			destinationType : Camera.DestinationType.FILE_URI,
+			targetWidth: 800,
+  			targetHeight: 800
 		});
 
 	});
@@ -77,7 +79,9 @@ function onDeviceReady() {
 			quality : 100,
 			correctOrientation: true,
 			destinationType : navigator.camera.DestinationType.FILE_URI,
-			sourceType : navigator.camera.PictureSourceType.PHOTOLIBRARY
+			sourceType : navigator.camera.PictureSourceType.PHOTOLIBRARY,
+			targetWidth: 800,
+  			targetHeight: 800
 		});
 
 	});
